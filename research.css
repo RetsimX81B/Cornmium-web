@@ -1,0 +1,105 @@
+/* style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1c4dab, #6a8edd);
+    color: white;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #1c4dab;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.title {
+    font-size: 24px;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.search-bar {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    flex: 1;
+    max-width: 300px;
+    min-width: 5px;
+    font-size: 16px;
+    color: #333;
+
+}
+
+.research-form {
+    margin-right: auto;
+    display: flex;
+}
+
+.research-button {
+    background: none;
+    border: none;
+    color: black;
+    width: fit-content;
+    position: relative;
+    left: -45px;
+    cursor: pointer;
+}
+
+.material-symbols-outlined {
+    width: 0;
+}
+
+
+.content {
+    padding: 20px;
+}
+
+#site-title:visited {
+    color: rgb(180, 180, 180);
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.circle {
+    width: 50px;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+}
+
+.text {
+    max-width: 600px;
+}
+
+.text h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.text p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#form-input {
+    display: none;
+    position: absolute;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read CSV File</title>
+    <link rel="shortcut icon" href="./image/logo2.ico" type="image/x-icon">
+</head>
+
+<body>
+    <input type="file" id="fileInput" accept=".csv" />
+    <pre id="output"></pre>
+
+    <form method="get" target="_self" id="pages-form">
+        <button id="see-more">See more</button>
+        <!--  <input type="text" id="form-input" name="action" value="see-more"> -->
+    </form>
+    <script>
+        var form = document.getElementById("pages-form");
+
+        document.getElementById('see-more').addEventListener("click", () => {
+            // Create a hidden input to specify the action
+            const seeMoreInput = document.createElement("input");
+            seeMoreInput.name = "action";
+            seeMoreInput.value = "see-more";
+
+            // Append the hidden input to the form
+            form.appendChild(seeMoreInput);
+
+            // Submit the form
+            form.submit();
+
+            // Remove the hidden input after submission to keep form clean
+            form.removeChild(seeMoreInput);
+        });
+    </script>
+</body>
+
+</html>
