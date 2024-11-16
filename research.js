@@ -1,8 +1,6 @@
 // Get the URL parameters
 const params = new URLSearchParams(window.location.search);
 
-console.log("test")
-
 // Get the value of the 'research' parameter
 const researchValue = params.get('research');
 
@@ -61,51 +59,76 @@ function getDescByUrl(csvData, searchUrl) {
 
 async function research(textzoneValue, index, urlindex, csvfile) {
     words = textzoneValue.split(" "); //TODO: lowercase
-    console.log(words);
+    console.log(`words: ${words}`);
 
     let websiteindex = 0;
     let websiteAnchor = document.getElementById("site-title-" + websiteindex);
     let websiteLogo = document.getElementById("image-" + websiteindex);
-    let websiteDescription = document.getElementById('site-desc-0' + websiteindex);
+    let websiteDescription = document.getElementById('site-desc-' + websiteindex);
 
     let seeMoreButton = document.getElementById('see-more');
     let seeMoreInput = document.getElementById('form-input');
 
-    console.log(urlindex);
-    words.forEach(word => {
-        console.log(word);
+    console.log(`url index:${urlindex}`);
+    words.forEach(async word => {
+        console.log(`word: ${word}`);
         if (index.hasOwnProperty(word)) {
 
             console.log(`Key ${word} exists in the JSON object.`);
-            console.log(index[word])
-            console.log(index[word].length)
-            console.log(typeof (index[word]))
-            let allLinks = Object.index[word]
+            console.log(index[word]);
+            let listOfUuid = index[word];
 
-            console.log(allLinks)
-            index[word].forEach(async link => {
-                let links = urlindex[link]
-                console.log(links);
-                //csv code to retrieve title
-                var form = document.getElementById("pages-form");
+            console.log(listOfUuid.length);
+            console.log(typeof (listOfUuid));
+            /*let allLinks = Object.listOfUuid
+            console.log(allLinks)*/
 
-                websiteLogo.src = "https://www.google.com/s2/favicons?domain=" + links; //set wesbsite logo
+            listOfUuid.forEach(async link => {
+                while (websiteindex < 5) {
+                    let links = urlindex[link]
+                    console.log(links);
+                    //csv code to retrieve title
+                    const csvData = await fetchCSV(csvfile);
+                    const parsedData = parseCSV(csvData);
 
-                websiteAnchor.href = links;
-                websiteAnchor.innerHTML = title;
+                    const searchUrl = links; // URL you are searching for
+                    const title = getTitleByUrl(parsedData, searchUrl);
+                    const desc = getDescByUrl(parsedData, searchUrl)
+                    console.log(`Title: ${title}`);
+                    console.log(`Desc: ${desc}`)
 
-                websiteDescription.innerHTML = desc;
+                    var form = document.getElementById("pages-form");
 
-                seeMoreButton.addEventListener("click", () => {
-                    // Append the hidden input to the form
-                    form.appendChild(seeMoreInput);
+                    const websiteLogoPromise = new Promise((resolve, reject) => {
+                        websiteLogo.src = "https://www.google.com/s2/favicons?domain=" + links; //set wesbsite logo
+                    });
 
-                    // Submit the form
-                    form.submit();
+                    websiteLogoPromise.catch((websiteLogo) => websiteLogo.src = './image/logo.png')
 
-                    // Remove the hidden input after submission to keep form clean
-                    form.removeChild(seeMoreInput);
-                });
+                    websiteAnchor.href = links;
+                    websiteAnchor.innerHTML = title;
+
+                    websiteDescription.innerHTML = desc;
+
+
+                    console.log(websiteindex);
+                    websiteindex++;
+
+                    seeMoreButton.addEventListener("click", () => {
+                        // Append the hidden input to the form
+                        form.appendChild(seeMoreInput);
+
+                        // Submit the form
+                        form.submit();
+
+                        // Remove the hidden input after submission to keep form clean
+                        form.removeChild(seeMoreInput);
+
+                    });
+                    if (websiteindex == 5) {
+                        break;
+                    }
+                }
             });
         } else {
             console.log("no !!!")
