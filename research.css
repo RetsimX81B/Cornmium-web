@@ -8,7 +8,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #1c4dab, #6a8edd);
+    background: linear-gradient(to right, #3a8dde, #a1c4fd);
     color: white;
 }
 
@@ -16,7 +16,7 @@ body {
     display: flex;
     align-items: center;
     padding: 20px;
-    background-color: #1c4dab;
+    background: linear-gradient(to right, #1c4dab, #6a8edd);
 }
 
 .logo {
@@ -103,3 +103,29 @@ body {
     display: none;
     position: absolute;
 }
+
+.page-input {
+    display: none;
+    position: absolute;
+}
+
+#see-more {
+    border-radius: 15px;
+    border: none;
+    width: 75px;
+    height: 25px;
+    transition: ease-in-out 0.3s;
+
+}
+
+#see-more:hover {
+    box-shadow: 4px 4px 10px black;
+}
+
+/* @keyframes shadow {
+    0% {
+        box-shadow: 0px 0px 10px black;
+    }
+
+    100% {}
+} */

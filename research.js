@@ -3,10 +3,19 @@ const params = new URLSearchParams(window.location.search);
 
 // Get the value of the 'research' parameter
 const researchValue = params.get('research');
+let pageValue = params.get('page');
 
 // Print the value to the console or display it on the page
 console.log(researchValue);
-//document.getElementById('output').innerHTML = researchValue;  // assuming you have an element with id "output"
+document.getElementById('text').value = researchValue;  // assuming you have an element with id "output"
+
+if (pageValue == null) {
+    pageValue = 1;
+}
+
+typeof pageValue;
+console.log(pageValue);
+document.getElementById('pageN').value = Number(pageValue) + 1;  // assuming you have an element with id "output"
 
 let csvfile = "./0scraper.csv"
 
@@ -62,15 +71,18 @@ async function research(textzoneValue, index, urlindex, csvfile) {
     console.log(`words: ${words}`);
 
     let websiteindex = 0;
-    let websiteAnchor = document.getElementById("site-title-" + websiteindex);
+    let websiteAnchor = document.getElementById("site-title-0");
     let websiteLogo = document.getElementById("image-" + websiteindex);
     let websiteDescription = document.getElementById('site-desc-' + websiteindex);
-
     let seeMoreButton = document.getElementById('see-more');
     let seeMoreInput = document.getElementById('form-input');
 
     console.log(`url index:${urlindex}`);
+
+
     words.forEach(async word => {
+
+
         console.log(`word: ${word}`);
         if (index.hasOwnProperty(word)) {
 
@@ -83,9 +95,28 @@ async function research(textzoneValue, index, urlindex, csvfile) {
             /*let allLinks = Object.listOfUuid
             console.log(allLinks)*/
 
+
             listOfUuid.forEach(async link => {
-                while (websiteindex < 5) {
-                    let links = urlindex[link]
+
+
+                while (websiteindex < 2) {
+
+                    var delayInMilliseconds = 1000; //1 second
+
+                    setTimeout(function () {
+                        //your code to be executed after 1 second
+                    }, delayInMilliseconds);
+
+
+                    websiteindex = Number(websiteindex) + 1;
+                    console.log(websiteindex);
+
+                    websiteAnchor = document.getElementById("site-title-" + websiteindex);
+                    websiteLogo = document.getElementById("image-" + websiteindex);
+                    websiteDescription = document.getElementById('site-desc-' + websiteindex);
+
+                    console.log("site-title-" + websiteindex);
+                    let links = urlindex[link];
                     console.log(links);
                     //csv code to retrieve title
                     const csvData = await fetchCSV(csvfile);
@@ -99,35 +130,19 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
                     var form = document.getElementById("pages-form");
 
-                    const websiteLogoPromise = new Promise((resolve, reject) => {
-                        websiteLogo.src = "https://www.google.com/s2/favicons?domain=" + links; //set wesbsite logo
-                    });
+                    console.log(websiteLogo);
+                    websiteLogo.src = websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
 
-                    websiteLogoPromise.catch((websiteLogo) => websiteLogo.src = './image/logo.png')
+                    // Fallback to default logo if the image fails to load
+                    websiteLogo.onerror = () => {
+                        websiteLogo.src = './image/logo.png';
+                        console.log("setting fallback");
+                    };
 
                     websiteAnchor.href = links;
                     websiteAnchor.innerHTML = title;
 
                     websiteDescription.innerHTML = desc;
-
-
-                    console.log(websiteindex);
-                    websiteindex++;
-
-                    seeMoreButton.addEventListener("click", () => {
-                        // Append the hidden input to the form
-                        form.appendChild(seeMoreInput);
-
-                        // Submit the form
-                        form.submit();
-
-                        // Remove the hidden input after submission to keep form clean
-                        form.removeChild(seeMoreInput);
-
-                    });
-                    if (websiteindex == 5) {
-                        break;
-                    }
                 }
             });
         } else {

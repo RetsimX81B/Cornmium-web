@@ -8,6 +8,20 @@
     <title>Research Page</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./image/logo2.ico" type="image/x-icon">
+
+    <!-- google fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
 </head>
 
 <body>
@@ -16,7 +30,12 @@
         <img src="./image/logo2.png" alt="Logo" class="logo">
 
         <!-- Search Bar -->
-        <input type="text" name="research" placeholder="Search here:" class="search-bar" id="text">
+        <div class="research-fields">
+            <input type="text" name="research" placeholder="Search here:" class="search-bar" id="text" required>
+            <button type="submit" class="research-button-field"><span class="material-symbols-outlined">
+                    search
+                </span></button>
+        </div>
         <!-- <textarea name="text" id="text" class="search-bar" cols="1" rows="1"></textarea> -->
         <!-- Button -->
         <button type="submit" class="search-button" id="research">Research</button>
