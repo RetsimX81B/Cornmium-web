@@ -66,6 +66,21 @@ function getDescByUrl(csvData, searchUrl) {
     return entry ? entry.paragraphs.slice(1) : 'Paragraph not found';
 }
 
+
+async function fetchBlob(url) {
+    const response = await fetch(url);
+
+    // Here is the significant part 
+    // reading the stream as a blob instead of json
+    return response.blob();
+
+}
+
+const downloadImageAndSetSource = async (imageUrl) => {
+    const image = await fetchBlob(imageUrl);
+    setImageSourceUrl(URL.createObjectURL(image));
+}
+
 async function research(textzoneValue, index, urlindex, csvfile) {
     words = textzoneValue.split(" "); //TODO: lowercase
     console.log(`words: ${words}`);
@@ -95,54 +110,62 @@ async function research(textzoneValue, index, urlindex, csvfile) {
             /*let allLinks = Object.listOfUuid
             console.log(allLinks)*/
 
-
+            console.log('length of object: ' + index[word].length)
+            let ListOfWordsLength = index[word].length;
+            let i = 0;
             listOfUuid.forEach(async link => {
 
+                while (ListOfWordsLength < 2) {
 
-                while (websiteindex < 2) {
+                    while (websiteindex < 2) {
 
-                    var delayInMilliseconds = 1000; //1 second
+                        var delayInMilliseconds = 1000; //1 second
 
-                    setTimeout(function () {
-                        //your code to be executed after 1 second
-                    }, delayInMilliseconds);
+                        setTimeout(function () {
+                            //your code to be executed after 1 second
+                        }, delayInMilliseconds);
 
 
-                    websiteindex = Number(websiteindex) + 1;
-                    console.log(websiteindex);
+                        websiteindex = Number(websiteindex) + 1;
+                        console.log(websiteindex);
 
-                    websiteAnchor = document.getElementById("site-title-" + websiteindex);
-                    websiteLogo = document.getElementById("image-" + websiteindex);
-                    websiteDescription = document.getElementById('site-desc-' + websiteindex);
+                        websiteAnchor = document.getElementById("site-title-" + websiteindex);
+                        websiteLogo = document.getElementById("image-" + websiteindex);
+                        websiteDescription = document.getElementById('site-desc-' + websiteindex);
 
-                    console.log("site-title-" + websiteindex);
-                    let links = urlindex[link];
-                    console.log(links);
-                    //csv code to retrieve title
-                    const csvData = await fetchCSV(csvfile);
-                    const parsedData = parseCSV(csvData);
+                        console.log("site-title-" + websiteindex);
+                        let links = urlindex[link];
+                        console.log(links);
+                        //csv code to retrieve title
+                        const csvData = await fetchCSV(csvfile);
+                        const parsedData = parseCSV(csvData);
 
-                    const searchUrl = links; // URL you are searching for
-                    const title = getTitleByUrl(parsedData, searchUrl);
-                    const desc = getDescByUrl(parsedData, searchUrl)
-                    console.log(`Title: ${title}`);
-                    console.log(`Desc: ${desc}`)
+                        //CSV part //
+                        const searchUrl = links; // URL you are searching for
+                        const title = getTitleByUrl(parsedData, searchUrl);
+                        const desc = getDescByUrl(parsedData, searchUrl)
+                        console.log(`Title: ${title}`);
+                        console.log(`Desc: ${desc}`)
 
-                    var form = document.getElementById("pages-form");
+                        var form = document.getElementById("pages-form");
 
-                    console.log(websiteLogo);
-                    websiteLogo.src = websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                        //Set the logo for the website
+                        console.log(websiteLogo);
+                        websiteLogo.src = websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                        // Fallback to default logo if the image fails to load
+                        websiteLogo.onerror = () => {
+                            websiteLogo.src = './image/logo.png';
+                            console.log("setting fallback");
+                        };
 
-                    // Fallback to default logo if the image fails to load
-                    websiteLogo.onerror = () => {
-                        websiteLogo.src = './image/logo.png';
-                        console.log("setting fallback");
-                    };
+                        //add complementary information
+                        websiteAnchor.href = links;
+                        websiteAnchor.innerHTML = title;
 
-                    websiteAnchor.href = links;
-                    websiteAnchor.innerHTML = title;
-
-                    websiteDescription.innerHTML = desc;
+                        websiteDescription.innerHTML = desc;
+                    }
+                    console.log(i);
+                    i++;
                 }
             });
         } else {
@@ -160,3 +183,20 @@ Promise.all([fetchJSONData("./index.json"), fetchJSONData("./urlindex.json")])
         }
     })
     .catch(error => console.error("Error fetching JSON data:", error));
+
+
+function downloadImage(url) {
+    fetch(url, {
+        mode: 'no-cors',
+    })
+        .then(response => response.blob())
+        .then(blob => {
+            let blobUrl = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.download = url.replace(/^.*[\\\/]/, '');
+            a.href = blobUrl;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+}
