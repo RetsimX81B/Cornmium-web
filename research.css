@@ -76,6 +76,7 @@ body {
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
+    display: none;
 }
 
 .circle {
@@ -109,16 +110,17 @@ body {
     position: absolute;
 }
 
-#see-more {
+.pages-button {
     border-radius: 15px;
     border: none;
     width: 75px;
     height: 25px;
     transition: ease-in-out 0.3s;
+    cursor: pointer;
 
 }
 
-#see-more:hover {
+.pages-button:hover {
     box-shadow: 4px 4px 10px black;
 }
 

@@ -5,6 +5,7 @@ const params = new URLSearchParams(window.location.search);
 const researchValue = params.get('research');
 let pageValue = params.get('page');
 
+let seeLessButton = document.getElementById('see-less');
 // Print the value to the console or display it on the page
 console.log(researchValue);
 document.getElementById('text').value = researchValue;  // assuming you have an element with id "output"
@@ -14,10 +15,18 @@ if (pageValue == null) {
 }
 
 typeof pageValue;
-console.log(pageValue);
+console.log("page value:", pageValue);
 document.getElementById('pageN').value = Number(pageValue) + 1;  // assuming you have an element with id "output"
 
 let csvfile = "./0scraper.csv"
+
+let seeMoreButton = document.getElementById('see-less').addEventListener("click", () => {
+    document.getElementById('pageN').value = Number(pageValue) - 1;
+});
+
+if (pageValue == 0) {
+    seeLessButton.style.display = " none";
+}
 
 async function fetchJSONData(file) {
     return fetch(file)
@@ -66,33 +75,30 @@ function getDescByUrl(csvData, searchUrl) {
     return entry ? entry.paragraphs.slice(1) : 'Paragraph not found';
 }
 
-
-async function fetchBlob(url) {
-    const response = await fetch(url);
-
-    // Here is the significant part 
-    // reading the stream as a blob instead of json
-    return response.blob();
-
-}
-
-const downloadImageAndSetSource = async (imageUrl) => {
-    const image = await fetchBlob(imageUrl);
-    setImageSourceUrl(URL.createObjectURL(image));
-}
-
 async function research(textzoneValue, index, urlindex, csvfile) {
     words = textzoneValue.split(" "); //TODO: lowercase
     console.log(`words: ${words}`);
 
+    let pageValue = params.get('page');
+
+    if (pageValue == null) {
+        pageValue = 1;
+    }
+
     let websiteindex = 0;
+    let linkindex = 0;
     let websiteAnchor = document.getElementById("site-title-0");
     let websiteLogo = document.getElementById("image-" + websiteindex);
     let websiteDescription = document.getElementById('site-desc-' + websiteindex);
     let seeMoreButton = document.getElementById('see-more');
+    let seeLessButton = document.getElementById('see-less');
     let seeMoreInput = document.getElementById('form-input');
+    let whileindex = 5;
+    let numberofarticles = 5;
 
-    console.log(`url index:${urlindex}`);
+    linkindex = 5 * pageValue
+
+    console.log(`url index: ${urlindex}`);
 
 
     words.forEach(async word => {
@@ -102,71 +108,84 @@ async function research(textzoneValue, index, urlindex, csvfile) {
         if (index.hasOwnProperty(word)) {
 
             console.log(`Key ${word} exists in the JSON object.`);
-            console.log(index[word]);
+            console.log(index[word]); //shows the list of all the uuids for the word
             let listOfUuid = index[word];
 
             console.log(listOfUuid.length);
             console.log(typeof (listOfUuid));
-            /*let allLinks = Object.listOfUuid
-            console.log(allLinks)*/
+            console.log('length of object: ' + index[word].length);
+            //let ListOfWordsLength = index[word].length;
 
-            console.log('length of object: ' + index[word].length)
-            let ListOfWordsLength = index[word].length;
-            let i = 0;
+            let ListOfWordsLength = index[word]?.length;
+
+            if (!Array.isArray(index[word])) {
+                console.error("Error: index[word] is not an array.");
+            } else if (isNaN(linkindex) || linkindex < 0 || linkindex >= ListOfWordsLength) {
+                console.error("Error: linkindex is not a valid index.", linkindex);
+                seeMoreButton.style.display = " none";
+            } else {
+                if (Number(linkindex) + numberofarticles <= ListOfWordsLength) {
+                    listOfUuid = listOfUuid.slice(linkindex, Number(linkindex) + numberofarticles);
+                } else {
+                    listOfUuid = listOfUuid.slice(linkindex, ListOfWordsLength);
+                }
+                console.log("Sliced Array:", listOfUuid);
+                seeLessButton.style.display = ""
+
+            }
+
+            if (listOfUuid.length < whileindex) {
+                console.log(typeof (listOfUuid))
+                whileindex = Number(listOfUuid?.length);
+                console.warn(`length of listuuid ${listOfUuid} and while index ${whileindex}`);
+            }
+
+
             listOfUuid.forEach(async link => {
 
-                while (ListOfWordsLength < 2) {
 
-                    while (websiteindex < 2) {
-
-                        var delayInMilliseconds = 1000; //1 second
-
-                        setTimeout(function () {
-                            //your code to be executed after 1 second
-                        }, delayInMilliseconds);
+                while (websiteindex < whileindex) {
 
 
-                        websiteindex = Number(websiteindex) + 1;
-                        console.log(websiteindex);
+                    /*console.log("link index: ", linkindex);
+                    linkindex = Number(linkindex) + 1;*/
 
-                        websiteAnchor = document.getElementById("site-title-" + websiteindex);
-                        websiteLogo = document.getElementById("image-" + websiteindex);
-                        websiteDescription = document.getElementById('site-desc-' + websiteindex);
+                    const websiteAnchor = document.getElementById("site-title-" + websiteindex);
+                    const websiteLogo = document.getElementById("image-" + websiteindex);
+                    const websiteDescription = document.getElementById('site-desc-' + websiteindex);
+                    const websiteArticle = document.getElementById("article-" + websiteindex);
 
-                        console.log("site-title-" + websiteindex);
-                        let links = urlindex[link];
-                        console.log(links);
-                        //csv code to retrieve title
-                        const csvData = await fetchCSV(csvfile);
-                        const parsedData = parseCSV(csvData);
-
-                        //CSV part //
-                        const searchUrl = links; // URL you are searching for
-                        const title = getTitleByUrl(parsedData, searchUrl);
-                        const desc = getDescByUrl(parsedData, searchUrl)
-                        console.log(`Title: ${title}`);
-                        console.log(`Desc: ${desc}`)
-
-                        var form = document.getElementById("pages-form");
-
-                        //Set the logo for the website
-                        console.log(websiteLogo);
-                        websiteLogo.src = websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
-                        // Fallback to default logo if the image fails to load
-                        websiteLogo.onerror = () => {
-                            websiteLogo.src = './image/logo.png';
-                            console.log("setting fallback");
-                        };
-
-                        //add complementary information
-                        websiteAnchor.href = links;
-                        websiteAnchor.innerHTML = title;
-
-                        websiteDescription.innerHTML = desc;
+                    if (!websiteAnchor || !websiteLogo || !websiteDescription) {
+                        console.warn(`Missing elements for websiteindex ${websiteindex}`);
+                        continue; // Skip to the next iteration
                     }
-                    console.log(i);
-                    i++;
+
+                    const links = urlindex[link]; //search for each uuid we have and transform it onto links
+                    console.log(links);
+                    if (!links) {
+                        console.warn(`Missing link for websiteindex ${websiteindex}`);
+                        continue;
+                    }
+
+                    const csvData = await fetchCSV(csvfile);
+                    const parsedData = parseCSV(csvData);
+                    const title = getTitleByUrl(parsedData, links) || 'Default Title';
+                    const desc = getDescByUrl(parsedData, links) || 'Default Description';
+
+                    websiteLogo.onerror = () => (websiteLogo.src = './image/logo.png');
+                    websiteAnchor.href = links;
+                    websiteAnchor.innerHTML = title;
+                    websiteDescription.innerHTML = desc;
+                    websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                    websiteArticle.style.display = "flex";
+
+
+                    console.log("website index: ", websiteindex);
+                    websiteindex = Number(websiteindex) + 1;
                 }
+                /*                     console.log(i);
+                                    i++;
+                                } */
             });
         } else {
             console.log("no !!!")
@@ -185,18 +204,3 @@ Promise.all([fetchJSONData("./index.json"), fetchJSONData("./urlindex.json")])
     .catch(error => console.error("Error fetching JSON data:", error));
 
 
-function downloadImage(url) {
-    fetch(url, {
-        mode: 'no-cors',
-    })
-        .then(response => response.blob())
-        .then(blob => {
-            let blobUrl = window.URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.download = url.replace(/^.*[\\\/]/, '');
-            a.href = blobUrl;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        })
-}
