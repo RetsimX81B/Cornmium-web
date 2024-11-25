@@ -3,30 +3,31 @@ const params = new URLSearchParams(window.location.search);
 
 // Get the value of the 'research' parameter
 const researchValue = params.get('research');
-let pageValue = params.get('page');
+let pageValue = Number(params.get('page'));
 
 let seeLessButton = document.getElementById('see-less');
+let seeMoreButton = document.getElementById('see-more');
 // Print the value to the console or display it on the page
 console.log(researchValue);
 document.getElementById('text').value = researchValue;  // assuming you have an element with id "output"
 
 if (pageValue == null) {
     pageValue = 1;
+} else if (pageValue === 0) {
+    seeLessButton.style.display = "none";
+
+    seeMoreButton.style.marginLeft = "80px";
 }
 
-typeof pageValue;
 console.log("page value:", pageValue);
+console.log(typeof (pageValue))
 document.getElementById('pageN').value = Number(pageValue) + 1;  // assuming you have an element with id "output"
 
 let csvfile = "./0scraper.csv"
 
-let seeMoreButton = document.getElementById('see-less').addEventListener("click", () => {
+seeLessButton.addEventListener("click", () => {
     document.getElementById('pageN').value = Number(pageValue) - 1;
 });
-
-if (pageValue == 0) {
-    seeLessButton.style.display = " none";
-}
 
 async function fetchJSONData(file) {
     return fetch(file)
@@ -122,7 +123,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                 console.error("Error: index[word] is not an array.");
             } else if (isNaN(linkindex) || linkindex < 0 || linkindex >= ListOfWordsLength) {
                 console.error("Error: linkindex is not a valid index.", linkindex);
-                seeMoreButton.style.display = " none";
+                seeMoreButton.style.display = "none";
             } else {
                 if (Number(linkindex) + numberofarticles <= ListOfWordsLength) {
                     listOfUuid = listOfUuid.slice(linkindex, Number(linkindex) + numberofarticles);
@@ -130,7 +131,6 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     listOfUuid = listOfUuid.slice(linkindex, ListOfWordsLength);
                 }
                 console.log("Sliced Array:", listOfUuid);
-                seeLessButton.style.display = ""
 
             }
 

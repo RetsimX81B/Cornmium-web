@@ -39,7 +39,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    right: -11px;
+    margin-left: 23px;
     position: relative;
 }
 
