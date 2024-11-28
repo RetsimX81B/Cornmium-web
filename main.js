@@ -7,8 +7,9 @@ document.getElementById('text').addEventListener('keypress', (e) => {
 }, false
 );
 
+document.getElementById("page").value = 1;
+
 document.getElementById('research').addEventListener('click', () => {
-    window.location.href = "https://fr.cornhub.website";
 })
 
 

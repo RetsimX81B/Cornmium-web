@@ -7,6 +7,7 @@ let pageValue = Number(params.get('page'));
 
 let seeLessButton = document.getElementById('see-less');
 let seeMoreButton = document.getElementById('see-more');
+const errorText = document.getElementById("error-text")
 // Print the value to the console or display it on the page
 console.log(researchValue);
 document.getElementById('text').value = researchValue;  // assuming you have an element with id "output"
@@ -80,7 +81,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
     words = textzoneValue.split(" "); //TODO: lowercase
     console.log(`words: ${words}`);
 
-    let pageValue = params.get('page');
+    let pageValue = Number(params.get('page'));
 
     let websiteindex = 0;
     let linkindex = 0;
@@ -143,10 +144,11 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                 seeMoreButton.style.display = "none";
 
             } else {
-                if (Number(linkindex) + numberofarticles <= ListOfWordsLength) {
-                    listOfUuid = listOfUuid.slice(linkindex, Number(linkindex) + numberofarticles);
+                //let sclicedUUidlist = listOfUuid ;
+                if (pageValue == 1) {
+                    listOfUuid = listOfUuid.slice(0, 5);
                 } else {
-                    listOfUuid = listOfUuid.slice(linkindex, ListOfWordsLength);
+                    listOfUuid = listOfUuid.slice((pageValue - 1) * 5, pageValue * 5)
                 }
                 console.log("Sliced Array:", listOfUuid);
             }
@@ -206,7 +208,12 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                                 } */
             });
         } else {
-            console.log("no !!!")
+            console.log("no !!!");
+            seeMoreButton.style.display = "none";
+            console.log(errorText.innerHTML)
+            errorText.innerHTML = errorText.innerHTML + researchValue;
+            console.log(errorText.value + researchValue)
+
         }
     });
 }
