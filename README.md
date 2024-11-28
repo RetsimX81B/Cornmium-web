@@ -26,13 +26,13 @@
 
 ## 🛡️ Privacy
 
-Cornmium is committed to user privacy. No personal data is collected or shared without your consent. See our [Privacy Policy](https://github.com/IvnoGood/Cornmium-app/pages/information/privacy.html) for more details.
+Cornmium is committed to user privacy. No personal data is collected or shared without your consent. See our [Privacy Policy](https://github.com/IvnoGood/Cornmium-web/blob/main/pages/information/privacy.html) for more details.
 
 ---
 
 ## 📝 License
 
-This project is licensed under the [MIT License](https://github.com/IvnoGood/Cornmium-web/LICENSE). Feel free to use, modify, and distribute!
+This project is licensed under the [MIT License](https://github.com/IvnoGood/Cornmium-web/blob/main/LICENSE). Feel free to use, modify, and distribute!
 
 ---
 
