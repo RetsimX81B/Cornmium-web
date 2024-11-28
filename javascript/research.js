@@ -25,7 +25,7 @@ console.log("page value:", pageValue);
 console.log(typeof (pageValue))
 document.getElementById('pageN').value = Number(pageValue) + 1;  // assuming you have an element with id "output"
 
-let csvfile = "./0scraper.csv"
+let csvfile = "../data/0scraper.csv"
 
 seeLessButton.addEventListener("click", () => {
     document.getElementById('pageN').value = Number(pageValue) - 1;
@@ -204,9 +204,6 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     console.log("website index: ", websiteindex);
                     websiteindex = Number(websiteindex) + 1;
                 }
-                /*                     console.log(i);
-                                    i++;
-                                } */
             });
         } else {
             console.log("no !!!");
@@ -220,7 +217,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
     });
 }
 
-Promise.all([fetchJSONData("./index.json"), fetchJSONData("./urlindex.json")])
+Promise.all([fetchJSONData("../data/index.json"), fetchJSONData("../data/urlindex.json")])
     .then(([index, urlindex]) => {
         if (index && urlindex) {
             research(researchValue, index, urlindex, csvfile);

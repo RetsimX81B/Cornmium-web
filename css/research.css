@@ -15,8 +15,18 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 20px;
     background: linear-gradient(to right, #1c4dab, #6a8edd);
+}
+
+.home-button-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    margin-right: auto;
 }
 
 .logo {
@@ -30,6 +40,8 @@ body {
     margin-right: auto;
     width: fit-content;
 }
+
+
 
 .search-bar {
     padding: 10px;
@@ -45,8 +57,9 @@ body {
 }
 
 .research-form {
-    margin-right: auto;
     display: flex;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .research-button {
