@@ -13,9 +13,9 @@ document.getElementById('text').value = researchValue;  // assuming you have an 
 
 if (pageValue == null) {
     pageValue = 1;
-} else if (pageValue === 0) {
+} else if (pageValue <= 1) {
     seeLessButton.style.display = "none";
-
+    pageValue = 1;
     seeMoreButton.style.marginLeft = "80px";
 }
 
@@ -82,10 +82,6 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
     let pageValue = params.get('page');
 
-    if (pageValue == null) {
-        pageValue = 1;
-    }
-
     let websiteindex = 0;
     let linkindex = 0;
     let websiteAnchor = document.getElementById("site-title-0");
@@ -97,7 +93,14 @@ async function research(textzoneValue, index, urlindex, csvfile) {
     let whileindex = 5;
     let numberofarticles = 5;
 
-    linkindex = 5 * pageValue
+
+    if (pageValue == 0) {
+        linkindex = 5;
+        console.warn(linkindex);
+    } else {
+        linkindex = 5 * pageValue
+    }
+
 
     console.log(`url index: ${urlindex}`);
 
@@ -119,11 +122,26 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
             let ListOfWordsLength = index[word]?.length;
 
+            console.log("Link index", linkindex)
+            if (isNaN(linkindex) || linkindex < 0 || linkindex >= ListOfWordsLength) {
+                console.error("Error: Futur linkindex is not a valid index.", linkindex);
+                seeMoreButton.style.display = "none";
+
+            }
+            if (pageValue == 0) {
+                linkindex = 5;
+                console.warn(linkindex);
+            } else {
+                linkindex = 5 / pageValue
+            }
+
+
             if (!Array.isArray(index[word])) {
                 console.error("Error: index[word] is not an array.");
             } else if (isNaN(linkindex) || linkindex < 0 || linkindex >= ListOfWordsLength) {
                 console.error("Error: linkindex is not a valid index.", linkindex);
                 seeMoreButton.style.display = "none";
+
             } else {
                 if (Number(linkindex) + numberofarticles <= ListOfWordsLength) {
                     listOfUuid = listOfUuid.slice(linkindex, Number(linkindex) + numberofarticles);
@@ -131,7 +149,6 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     listOfUuid = listOfUuid.slice(linkindex, ListOfWordsLength);
                 }
                 console.log("Sliced Array:", listOfUuid);
-
             }
 
             if (listOfUuid.length < whileindex) {
@@ -161,7 +178,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     }
 
                     const links = urlindex[link]; //search for each uuid we have and transform it onto links
-                    console.log(links);
+                    //console.log(links);
                     if (!links) {
                         console.warn(`Missing link for websiteindex ${websiteindex}`);
                         continue;
@@ -177,6 +194,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     websiteAnchor.innerHTML = title;
                     websiteDescription.innerHTML = desc;
                     websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                    //websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linuxfromscratch.org/lfs/downloads/stable/&size=16`;
                     websiteArticle.style.display = "flex";
 
 
