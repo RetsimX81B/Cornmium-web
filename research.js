@@ -7,7 +7,8 @@ let pageValue = Number(params.get('page'));
 
 let seeLessButton = document.getElementById('see-less');
 let seeMoreButton = document.getElementById('see-more');
-const errorText = document.getElementById("error-text")
+const errorText = document.getElementById("error-text");
+const notFoundDiv = document.getElementById("notfound");
 // Print the value to the console or display it on the page
 console.log(researchValue);
 document.getElementById('text').value = researchValue;  // assuming you have an element with id "output"
@@ -111,7 +112,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
         console.log(`word: ${word}`);
         if (index.hasOwnProperty(word)) {
-
+            notFoundDiv.style.display = "none";
             console.log(`Key ${word} exists in the JSON object.`);
             console.log(index[word]); //shows the list of all the uuids for the word
             let listOfUuid = index[word];
@@ -209,6 +210,7 @@ async function research(textzoneValue, index, urlindex, csvfile) {
             });
         } else {
             console.log("no !!!");
+            notFoundDiv.style.display = "block";
             seeMoreButton.style.display = "none";
             console.log(errorText.innerHTML)
             errorText.innerHTML = errorText.innerHTML + researchValue;
