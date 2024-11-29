@@ -15,18 +15,8 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 20px;
     background: linear-gradient(to right, #1c4dab, #6a8edd);
-}
-
-.home-button-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    margin-right: auto;
 }
 
 .logo {
@@ -35,15 +25,24 @@ body {
     margin-right: 10px;
 }
 
+.corn {
+    filter: invert();
+    /*change la couleur des images*/
+    mix-blend-mode: lighten;
+    /* change le fond des images*/
+    width: 150px;
+
+
+}
+
 .title {
     font-size: 24px;
     margin-right: auto;
     width: fit-content;
 }
 
-
-
 .search-bar {
+    display: block;
     padding: 10px;
     border-radius: 20px;
     border: none;
@@ -53,13 +52,15 @@ body {
     min-width: 5px;
     font-size: 16px;
     color: #333;
+    align-items: end;
 
 }
 
 .research-form {
+    margin-right: 50px;
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
+    align-items: center;
 }
 
 .research-button {
@@ -85,14 +86,10 @@ body {
     color: rgb(180, 180, 180);
 }
 
-.item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    display: none;
-}
+
 
 .circle {
+    height: 50px;
     width: 50px;
     border-radius: 100%;
     background-color: rgba(0, 0, 0, 0.1);
@@ -101,6 +98,7 @@ body {
 
 .text {
     max-width: 600px;
+
 }
 
 .text h2 {
@@ -113,6 +111,26 @@ body {
     line-height: 1.6;
 }
 
+article {
+    margin: 20px 0;
+    /*marge*/
+    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    /* transition de couleur */
+    padding: 20px;
+    /*padding simple*/
+    border-radius: 10px;
+    /*coin arrondi*/
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* ombre */
+    transition: transform 0.3s;
+    /* transition */
+}
+
+article:hover {
+    transform: scale(1.02);
+    /* transition avec agrr=andissement */
+}
+
 #form-input {
     display: none;
     position: absolute;
@@ -123,24 +141,35 @@ body {
     position: absolute;
 }
 
-.pages-button {
-    border-radius: 15px;
-    border: none;
-    width: 75px;
-    height: 25px;
-    transition: ease-in-out 0.3s;
-    cursor: pointer;
 
+.pages-button {
+    background: linear-gradient(to right, #1c4dab, #6a8edd);
+    /*couleur*/
+    color: white;
+    /*couleur du texte*/
+    border: none;
+    /*pas de bordure*/
+    padding: 10px 20px;
+    /*le padding basique*/
+    border-radius: 20px;
+    /*forme des coins arrondis*/
+    font-size: 16px;
+    /*taille*/
+    font-family: Arial, sans-serif;
+    /*police*/
+    cursor: pointer;
+    /*petite main*/
+    outline: none;
+    /*pas de contour*/
+    transition: 0.3s ease, transform 0.2s ease;
+    /* transition */
 }
 
 .pages-button:hover {
-    box-shadow: 4px 4px 10px black;
+    background: linear-gradient(to left, #3a8dde, #a1c4fd);
+    /* transition de couleur */
+    transform: translateY(-2px);
+    /* transition agréable*/
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* transition ombre*/
 }
-
-/* @keyframes shadow {
-    0% {
-        box-shadow: 0px 0px 10px black;
-    }
-
-    100% {}
-} */
