@@ -1,0 +1,60 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to right, #1c4dab, #6a8edd);
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.corn {
+    filter: invert();
+    /*change la couleur des images*/
+    mix-blend-mode: lighten;
+    /* change le fond des images*/
+    width: 150px;
+
+
+}
+
+.title {
+    font-size: 24px;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.search-bar {
+    display: block;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    flex: 1;
+    max-width: 300px;
+    min-width: 5px;
+    font-size: 16px;
+    color: #333;
+    align-items: end;
+
+}
+
+.research-form {
+    margin-right: 50px;
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+
+.research-button {
+    background: none;
+    border: none;
+    color: black;
+    width: fit-content;
+    position: relative;
+    left: -45px;
+    cursor: pointer;
+}
