@@ -5,6 +5,34 @@
     box-sizing: border-box;
 }
 
+header {
+    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    /* Utilise le même dégradé que le footer */
+    padding: 20px;
+    /* Un peu d'espace pour respirer */
+    text-align: center;
+    /* Centre le titre et le slogan */
+    color: white;
+    /* Couleur du texte en blanc pour le contraste */
+    width: 100%;
+}
+
+header h1 {
+    font-size: 36px;
+    /* Un titre un peu plus grand */
+    font-weight: bold;
+    /* En gras pour plus d'impact */
+    margin-bottom: 10px;
+    /* Un peu d'espace entre le titre et le slogan */
+}
+
+header p {
+    font-size: 18px;
+    /* Un slogan un peu plus petit */
+    color: #e0e0e0;
+    /* Un gris clair pour le slogan, en harmonie avec le fond */
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -13,25 +41,37 @@ body {
     height: 100vh;
     background: linear-gradient(to right, #3a8dde, #a1c4fd);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*direction de la page*/
+    justify-content: space-between;
+    /* Pour pousser le footer vers le bas */
+    height: 100vh;
+    /* Assurez-vous que le body prend toute la hauteur de la vue */
+
 }
 
 /* Container for the elements */
 .container {
+    flex-grow: 1;
     text-align: center;
     display: flex;
+    flex: 1;
+    /* Prend toute la hauteur restante*/
     flex-direction: column;
+    text-align: center;
     margin-bottom: auto;
     margin-top: auto;
 }
 
 /* Logo styling */
 .logo {
-    /* flex: 2;
-    max-width: 300px; */
+
     width: 200px;
-    margin-bottom: 20px;
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 300px;
 }
 
 .research-fields {
@@ -51,13 +91,13 @@ body {
     margin-bottom: 20px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
-    height: 35px;
+    height: 40px;
     font-family: Arial, Helvetica, sans-serif;
     resize: none;
     border-radius: 20px;
     border: none;
     flex: 1;
-    max-width: 300px;
+    max-width: 450px;
     min-width: 5px;
 }
 
@@ -98,4 +138,109 @@ body {
 form {
     display: flex;
     width: 100%;
+}
+
+footer {
+    background: linear-gradient(to left, #3a8dde, #a1c4fd);
+    color: white;
+    /* Couleur du texte */
+    padding: 20px;
+    /* simple padding */
+    text-align: center;
+    /* Centrer le texte */
+    margin-top: auto;
+    /* Permet de pousser le footer vers le bas */
+    width: 100%;
+    position: relative;
+    height: fit-content;
+    margin-top: 200px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    /* Largeur maximale du footer */
+    margin: 0 auto;
+    /* Centrer le footer */
+}
+
+.footer-info {
+    margin-bottom: 15px;
+    /* Espacement entre sections */
+}
+
+.footer-links {
+    list-style: none;
+    /* Supprimer les puces de la liste */
+    padding: 0;
+    /* Supprimer le padding */
+}
+
+.footer-links li {
+    display: inline;
+    /* Afficher les liens en ligne */
+    margin: 0 10px;
+    /* Espacement entre les liens */
+}
+
+.footer-links a {
+    color: white;
+    /* Couleur des liens */
+    text-decoration: none;
+    /* Supprimer le soulignement */
+    transition: color 0.3s;
+    /* Transition pour le survol */
+}
+
+.footer-links a:hover {
+    color: #1e5b85;
+    /* Couleur des liens au survol */
+}
+
+.footer-work {
+    margin-top: 15px;
+    /* Espacement supérieur */
+}
+
+.github-link {
+    color: #ffffff;
+    /* Couleur du lien GitHub */
+    text-decoration: none;
+    /* Supprimer le soulignement */
+}
+
+.github-link:hover {
+    color: #1e5b85;
+    /* Couleur au survol */
+}
+
+.prv {
+    width: 55px;
+    /* Defini la taille des images*/
+    filter: invert();
+    /*change la couleur des images*/
+    mix-blend-mode: lighten;
+    /* change le fond des images*/
+}
+
+.image-container {
+    justify-content: center;
+    /* Centre l'image horizontalement */
+    align-items: center;
+    /* Centre l'image verticalement */
+    width: 60px;
+    /* Largeur du conteneur */
+    height: 60px;
+    /* Hauteur du conteneur */
+    border-radius: 50%;
+    /* Rend le conteneur circulaire */
+    border: 2px solid white;
+    /* Bordure blanche */
+    margin: 15px;
+    /* Ajoute un espacement autour du conteneur */
+    display: inline-block;
+    /* Affiche les conteneurs en ligne*/
+}
+
+.info {
+    color: white;
 }
