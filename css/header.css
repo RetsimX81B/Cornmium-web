@@ -69,3 +69,87 @@
     left: -45px;
     cursor: pointer;
 }
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.theme-box {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-box input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #a1c4fd;
+    transition: background-color 0.4s; /* Transition pour la couleur de fond */
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px; /* Hauteur du rond */
+    width: 24px; /* Largeur du rond */
+    left: 0; /* Position initiale à gauche */
+    background-color: transparent; /* Rendre le rond transparent */
+    border-radius: 50%; /* Forme ronde */
+    transition: transform 0.4s ease; /* Transition pour le mouvement */
+}
+
+input:checked + .slider {
+    background-color: #2196F3; /* Couleur de fond quand coché */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px); /* Déplace le rond vers la droite */
+}
+
+.icon-sun, .icon-moon {
+    position: absolute;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Transition pour l'opacité et le mouvement */
+}
+
+.icon-sun {
+    left: 0px; /* Position du soleil */
+    opacity: 1; /* Visible par défaut */
+}
+
+.icon-moon {
+    left: 25px; /* Position de la lune */
+    opacity: 0; /* Invisible par défaut */
+    transform: translateY(-50%) scale(0.8); /* Échelle réduite pour la lune */
+}
+
+input:checked + .slider .icon-sun {
+    opacity: 0; /* Cache le soleil quand coché */
+    transform: translate(20px, -50%) scale(0.8); /* Déplace le soleil vers la droite et réduit l'échelle */
+}
+
+input:checked + .slider .icon-moon {
+    opacity: 1; /* Affiche la lune quand coché */
+    transform: translateY(-50%) scale(1); /* Échelle normale pour la lune */
+}
+
+em {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
+}

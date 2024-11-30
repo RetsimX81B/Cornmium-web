@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/information.css">
 
+
     <!-- google fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
@@ -36,6 +37,18 @@
                     search
                 </span></button>
         </form>
+        <nav>
+            <div class="theme-switch-wrapper">
+                <label class="theme-box" for="checkbox">
+                    <input type="checkbox" name="" id="checkbox">
+                    <div class="slider round">
+                        <span class="icon-sun" aria-hidden="true">☀️</span>
+                        <span class="icon-moon" aria-hidden="true">🌙</span>
+                    </div>
+                </label>
+                <em id="checkbox-text" style="color: var(--text-color);">Enable Dark Mode</em>
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -122,5 +135,6 @@
         </p>
     </main>
 </body>
+<script type="text/javascript" src="../../javascript/darkmode.js"></script>
 
 </html>

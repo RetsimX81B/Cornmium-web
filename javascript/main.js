@@ -9,10 +9,6 @@ document.getElementById('text').addEventListener('keypress', (e) => {
 
 document.getElementById("page").value = 1;
 
-document.getElementById('research').addEventListener('click', () => {
-})
-
-
 
 
 
