@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read CSV File</title>
+    <title>Test colors</title>
     <link rel="shortcut icon" href="./image/logo2.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/main.css">
 
@@ -27,11 +27,11 @@
     <div style="background-color: var(--placeholders); height: 64px;">--placeholders</div>
     <div style="background-color: var(--text-color); height: 64px;">--text-color</div>
 
-    <button id="color">color</button>
+    <button id="color">Change colors</button>
     <p id="state" style="color: black;"></p>
 </body>
 
-<script>
+<script type="text/javascript">
     /*! color palette
 
     dark mode:
@@ -55,11 +55,10 @@
     length: 7
 
     */
-    
+
 
     function setPalette(isOn) {
         if (isOn) {
-            switchText.innerHTML = "Enable Dark Mode"
             document.documentElement.style.setProperty('--background-inverse', 'linear-gradient(to left, #1b1f29, #343a46)');
             document.documentElement.style.setProperty('--background', 'linear-gradient(to right, #1b1f29, #343a46)');
             document.documentElement.style.setProperty('--background-header', 'linear-gradient(to right, #2a2f3b, #404857)');
@@ -68,7 +67,6 @@
             document.documentElement.style.setProperty('--placeholders', '#777');
             document.documentElement.style.setProperty('--text-color', '#ffffff');
         } else {
-            switchText.innerHTML = "Enable Light Mode"
             document.documentElement.style.setProperty('--background-inverse', 'linear-gradient(to left, #3a8dde, #a1c4fd)');
             document.documentElement.style.setProperty('--background', 'linear-gradient(to right, #3a8dde, #a1c4fd)');
             document.documentElement.style.setProperty('--background-header', 'linear-gradient(to right, #1c4dab, #6a8edd)');
