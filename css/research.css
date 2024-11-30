@@ -1,14 +1,8 @@
 /* style.css */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    background: var(--background);
     color: white;
 }
 
@@ -51,9 +45,10 @@ body {
 }
 
 article {
+    display: none; /*gestionnement par js*/
     margin: 20px 0;
     /*marge*/
-    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    background: var(--background);
     /* transition de couleur */
     padding: 20px;
     /*padding simple*/
@@ -82,9 +77,9 @@ article:hover {
 
 
 .pages-button {
-    background: linear-gradient(to right, #1c4dab, #6a8edd);
+    background: var(--background-header);
     /*couleur*/
-    color: white;
+    color: var(--text-color);
     /*couleur du texte*/
     border: none;
     /*pas de bordure*/
@@ -105,7 +100,7 @@ article:hover {
 }
 
 .pages-button:hover {
-    background: linear-gradient(to left, #3a8dde, #a1c4fd);
+    background: var(--background-inverse);
     /* transition de couleur */
     transform: translateY(-2px);
     /* transition agréable*/

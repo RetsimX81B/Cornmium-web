@@ -1,8 +1,9 @@
 .header {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 20px;
-    background: linear-gradient(to right, #1c4dab, #6a8edd);
+    background: var(--background-header);
 }
 
 .logo {
@@ -17,14 +18,24 @@
     mix-blend-mode: lighten;
     /* change le fond des images*/
     width: 150px;
-
-
 }
 
 .title {
     font-size: 24px;
     margin-right: auto;
     width: fit-content;
+    color: white;
+    text-decoration: none; 
+}
+
+.home-button-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    margin-right: 15px;
+    margin-right: auto;
 }
 
 .search-bar {
@@ -37,7 +48,7 @@
     max-width: 300px;
     min-width: 5px;
     font-size: 16px;
-    color: #333;
+    color: var(--placeholders);
     align-items: end;
 
 }
@@ -52,7 +63,7 @@
 .research-button {
     background: none;
     border: none;
-    color: black;
+    color: var(--accent-color);
     width: fit-content;
     position: relative;
     left: -45px;

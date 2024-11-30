@@ -78,6 +78,19 @@ function getDescByUrl(csvData, searchUrl) {
     return entry ? entry.paragraphs.slice(1) : 'Paragraph not found';
 }
 
+function UrlExists(url) {
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    if (http.status != 404) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
 async function research(textzoneValue, index, urlindex, csvfile) {
     words = textzoneValue.split(" "); //TODO: lowercase
     console.log(`words: ${words}`);
@@ -165,8 +178,8 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
 
                 while (websiteindex < whileindex) {
-
-
+                    let status = UrlExists(link)
+                    console.log(status);
                     /*console.log("link index: ", linkindex);
                     linkindex = Number(linkindex) + 1;*/
 
@@ -196,11 +209,17 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     websiteAnchor.href = links;
                     websiteAnchor.innerHTML = title;
                     websiteDescription.innerHTML = desc;
-                    websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
-                    //websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linuxfromscratch.org/lfs/downloads/stable/&size=16`;
                     websiteArticle.style.display = "flex";
+                    if (status != 404) {
+                        websiteLogo.src = "../image/logo.png";
+                        console.log("1");
+                        //websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linuxfromscratch.org/lfs/downloads/stable/&size=16`;
 
+                    } else {
 
+                        websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                        console.log("2");
+                    }
                     console.log("website index: ", websiteindex);
                     websiteindex = Number(websiteindex) + 1;
                 }

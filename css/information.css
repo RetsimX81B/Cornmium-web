@@ -1,13 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #3a8dde, #a1c4fd);
-    color: white;
+    background: var(--background);
+    color: var(--text-color);
 }
 
 main {
