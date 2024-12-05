@@ -57,8 +57,8 @@ function parseCSV(data) {
     const result = [];
 
     rows.forEach(row => {
-        const [url, title, paragraphs] = row.split(',');
-        result.push({ url, title, paragraphs });
+        const [url, Favicon, title, paragraphs] = row.split(',');
+        result.push({ url, Favicon, title, paragraphs });
     });
 
     return result;
@@ -76,6 +76,15 @@ function getDescByUrl(csvData, searchUrl) {
     }
     const entry = csvData.find(item => item.url.trim() === searchUrl.trim());
     return entry ? entry.paragraphs.slice(1) : 'Paragraph not found';
+}
+
+function getFavByUrl(csvData, searchUrl) {
+    if (!Array.isArray(csvData)) {
+        console.error("csvData is not an array");
+        return;
+    }
+    const entry = csvData.find(item => item.url.trim() === searchUrl.trim());
+    return entry ? entry.Favicon : 'Favicon not found';
 }
 
 function UrlExists(url) {
@@ -178,8 +187,8 @@ async function research(textzoneValue, index, urlindex, csvfile) {
 
 
                 while (websiteindex < whileindex) {
-                    let status = UrlExists(link)
-                    console.log(status);
+                    /*                     let status = UrlExists(link)
+                                        console.log(status); */
                     /*console.log("link index: ", linkindex);
                     linkindex = Number(linkindex) + 1;*/
 
@@ -204,22 +213,26 @@ async function research(textzoneValue, index, urlindex, csvfile) {
                     const parsedData = parseCSV(csvData);
                     const title = getTitleByUrl(parsedData, links) || 'Default Title';
                     const desc = getDescByUrl(parsedData, links) || 'Default Description';
+                    const Fav = getFavByUrl(parsedData, links) || '../image/logo.png';
 
-                    websiteLogo.onerror = () => (websiteLogo.src = './image/logo.png');
+                    websiteLogo.onerror = () => (websiteLogo.src = '../image/errorlogo.png');
                     websiteAnchor.href = links;
                     websiteAnchor.innerHTML = title;
                     websiteDescription.innerHTML = desc;
                     websiteArticle.style.display = "flex";
-                    if (status != 404) {
-                        websiteLogo.src = "../image/logo.png";
-                        console.log("1");
-                        //websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linuxfromscratch.org/lfs/downloads/stable/&size=16`;
 
-                    } else {
+                    websiteLogo.src = Fav;
 
-                        websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
-                        console.log("2");
-                    }
+                    /*  if (status != 404) {
+                         websiteLogo.src = "../image/logo.png";
+                         console.log("1");
+                         //websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://www.linuxfromscratch.org/lfs/downloads/stable/&size=16`;
+ 
+                     } else {
+ 
+                         websiteLogo.src = `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${links}&size=16`;
+                         console.log("2");
+                     } */
                     console.log("website index: ", websiteindex);
                     websiteindex = Number(websiteindex) + 1;
                 }
