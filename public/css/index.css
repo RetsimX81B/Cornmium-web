@@ -1,18 +1,14 @@
 /* Reset some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 
 header {
-    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    background: var(--background);
     /* Utilise le même dégradé que le footer */
     padding: 20px;
     /* Un peu d'espace pour respirer */
     text-align: center;
     /* Centre le titre et le slogan */
-    color: white;
+    color: var(--text-color);
     /* Couleur du texte en blanc pour le contraste */
     width: 100%;
 }
@@ -29,7 +25,7 @@ header h1 {
 header p {
     font-size: 18px;
     /* Un slogan un peu plus petit */
-    color: #e0e0e0;
+    color: var(--text-color);
     /* Un gris clair pour le slogan, en harmonie avec le fond */
 }
 
@@ -39,7 +35,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    background: var(--background);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -66,8 +62,8 @@ body {
 
 /* Logo styling */
 .logo {
-
     width: 200px;
+    height: 200px;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
@@ -112,27 +108,7 @@ body {
 }
 
 .research-button-field:hover {
-    color: rgb(114, 114, 114);
-}
-
-/* Button styling */
-.search-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #4a90e2;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.search-button:hover {
-    background-color: #357abd;
+    color: var(--accent-color-hover);
 }
 
 form {
@@ -169,5 +145,5 @@ form {
 }
 
 .info {
-    color: white;
+    color: var(--text-color);
 }

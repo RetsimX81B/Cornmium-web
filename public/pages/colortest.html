@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test colors</title>
+    <link rel="shortcut icon" href="./image/logo2.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        * {
+            color: var(--text-color);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="background: var(--background-inverse); height: 64px;">--background-inverse</div>
+    <div style="background: var(--background); height: 64px;">--background</div>
+    <div style="background: var(--background-header); height: 64px;">--background-header</div>
+    <div style="background-color: var(--accent-color); height: 64px;">--accent-color</div>
+    <div style="background-color: var(--accent-color-hover); height: 64px;">--accent-color-hover</div>
+    <div style="background-color: var(--placeholders); height: 64px;">--placeholders</div>
+    <div style="background-color: var(--text-color); height: 64px;">--text-color</div>
+
+    <button id="color">Change colors</button>
+    <p id="state" style="color: black;"></p>
+</body>
+
+<script type="text/javascript">
+    /*! color palette
+
+    dark mode:
+    --background-inverse: linear-gradient(to left, #1b1f29, #343a46);
+    --background: linear-gradient(to right, #1b1f29, #343a46);
+    --background-header: linear-gradient(to right, #2a2f3b, #404857);
+    --accent-color: #e3e3e3;
+    --accent-color-hover: #b3b3b3;
+    --placeholders: #777;
+    --text-color: #ffffff;
+    length: 7
+
+    white  mode:
+    --background-inverse: linear-gradient(to left, #3a8dde, #a1c4fd);
+    --background: linear-gradient(to right, #3a8dde, #a1c4fd);
+    --background-header: linear-gradient(to right, #1c4dab, #6a8edd);
+    --accent-color: black;
+    --accent-color-hover: rgb(114, 114, 114);
+    --placeholders: #333;
+    --text-color: white;
+    length: 7
+
+    */
+
+
+    function setPalette(isOn) {
+        if (isOn) {
+            document.documentElement.style.setProperty('--background-inverse', 'linear-gradient(to left, #1b1f29, #343a46)');
+            document.documentElement.style.setProperty('--background', 'linear-gradient(to right, #1b1f29, #343a46)');
+            document.documentElement.style.setProperty('--background-header', 'linear-gradient(to right, #2a2f3b, #404857)');
+            document.documentElement.style.setProperty('--accent-color', '#e3e3e3');
+            document.documentElement.style.setProperty('--accent-color-hover', '#b3b3b3');
+            document.documentElement.style.setProperty('--placeholders', '#777');
+            document.documentElement.style.setProperty('--text-color', '#ffffff');
+        } else {
+            document.documentElement.style.setProperty('--background-inverse', 'linear-gradient(to left, #3a8dde, #a1c4fd)');
+            document.documentElement.style.setProperty('--background', 'linear-gradient(to right, #3a8dde, #a1c4fd)');
+            document.documentElement.style.setProperty('--background-header', 'linear-gradient(to right, #1c4dab, #6a8edd)');
+            document.documentElement.style.setProperty('--accent-color', 'black');
+            document.documentElement.style.setProperty('--accent-color-hover', 'rgb(114, 114, 114)');
+            document.documentElement.style.setProperty('--placeholders', '#333');
+            document.documentElement.style.setProperty('--text-color', 'white');
+        }
+    }
+
+    let isOn = localStorage.getItem('isOn');
+    isOn = isOn === 'true'; // Ensure it's a boolean
+    setPalette(isOn);
+
+    document.getElementById("state").innerHTML = isOn;
+
+    document.getElementById("color").addEventListener("click", () => {
+        isOn = !isOn;
+        console.log("is on", isOn)
+        document.getElementById("state").innerHTML = isOn;
+        localStorage.setItem('isOn', isOn.toString());
+        setPalette(isOn);
+    });
+
+</script>
+
+</html>

@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cornmium</title>
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/research.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="shortcut icon" href="../image/logo2.ico" type="image/x-icon">
 
@@ -28,7 +30,7 @@
 <body>
 
     <header class="header">
-        <a href="./index.html" class="home-button-header">
+        <a href="./../index.html" class="home-button-header">
             <img src="../image/logo2.png" alt="Logo" class="logo">
             <h1 class="title">Cornmium</h1>
             <!-- <img src="./image/logo-search.png" alt="" class="corn"> -->
@@ -39,6 +41,18 @@
                     search
                 </span></button>
         </form>
+        <nav>
+            <div class="theme-switch-wrapper">
+                <label class="theme-box" for="checkbox">
+                    <input type="checkbox" name="" id="checkbox">
+                    <div class="slider round">
+                        <span class="icon-sun" aria-hidden="true">☀️</span>
+                        <span class="icon-moon" aria-hidden="true">🌙</span>
+                    </div>
+                </label>
+                <em id="checkbox-text" style="color: var(--text-color);">Enable Dark Mode</em>
+            </div>
+        </nav>
     </header>
 
     <main class="content">
@@ -81,7 +95,7 @@
 
         <!-- Article 4 -->
         <article class="item" id="article-4">
-            <img src="./image/logo.png" alt="logo" class="circle" id="image-4">
+            <img src="../image/img-mai.jpg" alt="logo" class="circle" id="image-4">
             <section class="text" id="section-4">
                 <a id="site-title-4" href="">Article Title 4</a>
                 <p id="site-desc-4">Description for article 4 goes here.</p>
@@ -100,7 +114,7 @@
         <div class="not-found" id="notfound">
             <h2 id="error-text">The term&nbsp;</h2>
             <p>does not exist in our database</p>
-            <p>sorry for the encovenience</p>
+            <p>sorry for the incovenience</p>
             <iframe src="https://giphy.com/embed/26uf2veW2vkZNjjuo" width="480" height="338" style="" frameBorder="0"
                 class="giphy-embed" allowFullScreen></iframe>
             <p><a style="color: white; font-size: 10px; text-decoration: none;"
@@ -109,12 +123,27 @@
     </main>
 
     <footer>
-        <a href="./information/terms.html">Terms of service</a>
-        <a href="./information/privacy.html">Privacy policy</a>
-        <a href="./information/fairuse.html">Fair use notice</a>
-    </footer>
+        <div class="footer-content">
+            <div class="footer-info">
 
+                <p class="info">Information</p>
+                <ul class="footer-links">
+                    <li><a href="./information/privacy.html">Politique de confidentialité</a></li>
+                    <li><a href="./information/terms.html">Conditions d'utilisation</a></li>
+                    <li><a href="./information/fairuse.html">Conditions d'utilisation équitables</a></li>
+                </ul>
+            </div>
+            <div class="footer-work">
+                <p class="work">Travaillez avec nous</p>
+                <a href="https://github.com/IvnoGood" class="github-link">GitHub</a>
+                <p>&copy; 2024. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 <script src="../javascript/research.js"></script>
+<script type="text/javascript" src=" ../javascript/darkmode.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8585028508223363"
+    crossorigin="anonymous"></script>
 
 </html>

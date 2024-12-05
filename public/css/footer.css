@@ -1,5 +1,5 @@
 footer {
-    background: linear-gradient(to left, #3a8dde, #a1c4fd);
+    background: var(--background-inverse);
     color: white;
     /* Couleur du texte */
     padding: 20px;
@@ -11,7 +11,7 @@ footer {
     width: 100%;
     position: relative;
     height: fit-content;
-    margin-top: 200px;
+    margin-top: auto;
 }
 
 .footer-content {
