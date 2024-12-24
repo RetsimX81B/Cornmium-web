@@ -3,11 +3,17 @@
 
 body {
   font-size: 10px;
-  align-items: baseline;
+  align-items: center;
   color: #fff;
+  display: flex;
   
 }
-
+header{
+  height: 100px;
+}
+.material-symbols-outlined{
+  margin-top: 0;
+}
 a {
   color: #fff;
   text-decoration: none;
@@ -31,6 +37,12 @@ a {
   line-height: 1.6; /* Espacement entre les lignes */
 }
 
+.article{
+  display: flex;
+  margin-left: 50%;
+  margin-right: 50%;
+  
+}
 .second-text{
   margin-top: 100px;
 }
