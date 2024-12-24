@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/story.css">
-    
+     <link rel="stylesheet" href="../css/research.css"
+
     <!-- google fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
@@ -28,20 +29,32 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div class="theme-switch-wrapper">
-                <label class="theme-box" for="checkbox">
-                    <input type="checkbox" name="" id="checkbox">
-                    <div class="slider round">
-                        <span class="icon-sun" aria-hidden="true">☀️</span>
-                        <span class="icon-moon" aria-hidden="true">🌙</span>
-                    </div>
-                </label>
-                <em id="checkbox-text" style="color: var(--text-color);">Enable Dark Mode</em>
-            </div>
-        </nav>
-    </header>
+  <header class="header">
+    <a href="./../index.html" class="home-button-header">
+        
+        <h1 class="title">Cornmium</h1>
+        <!-- <img src="./image/logo-search.png" alt="" class="corn"> -->
+    </a>
+    <form class="research-form" action="" method="get">
+        <input type="text" placeholder="Search here:" class="search-bar" name="research">
+        <button type="submit" class="research-button"><span class="material-symbols-outlined">
+                search
+            </span></button>
+    </form>
+    <nav>
+        <div class="theme-switch-wrapper">
+            <label class="theme-box" for="checkbox">
+                <input type="checkbox" name="" id="checkbox">
+                <div class="slider round">
+                    <span class="icon-sun" aria-hidden="true">☀️</span>
+                    <span class="icon-moon" aria-hidden="true">🌙</span>
+                </div>
+            </label>
+            <em id="checkbox-text" style="color: var(--text-color);">Enable Dark Mode</em>
+        </div>
+    </nav>
+</header>
+
     <main>
     
       <div class="first-text">
@@ -59,9 +72,8 @@
           <p>The cornmium browser will be the one you need all the time</p>
           
       </div>
-        <div class="article">
-       <img src="../image/book" class="book">
-     
+        
+          <div class="article">
         <p>Same internet
         <br>
         More fun
@@ -69,7 +81,7 @@
         More curn
         <br>
       And it's all you need</p>
-      
+    </div>
         
     </div>
    </div>         
@@ -85,7 +97,7 @@
   <h2>Browser History</h2>
   <p>Since 2024, we work on the most private browser for you</p>
   <p>
-      <a href="">Learn more ></a>
+      <a href="">Learn more =></a>
   </p>
 </div>
 
